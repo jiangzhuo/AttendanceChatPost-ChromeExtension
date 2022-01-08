@@ -13,22 +13,32 @@
     <div class="container">
       <h1>Chat setting</h1>
       <form>
+
         <div class="row">
           <div class="mb-3 col-sm-7">
-            <label for="webhook-url" class="h3 form-label">webhook url</label>
-            <input type="url" class="form-control" id="webhook-url" placeholder="https://your-chat/hooks/XXXXXXXXXX" required>
+            <label for="proxy" class="h3 form-label">proxy url</label>
+            <input type="text" class="form-control" id="proxy" placeholder="https://{yourProxy}.execute-api.ap-northeast-1.amazonaws.com/default/AttendanceChatPost">
+            <div id="proxyHelp" class="form-text">proxy for slack api, to bypass the CORS security policy</div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="mb-3 col-sm-7">
+            <label for="token" class="h3 form-label">token</label>
+            <input type="url" class="form-control" id="token" placeholder="xoxc-xxxxxxxxxx-xxxxxxxxxxxx-xxxxxxxxxxxxx-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" required>
+          </div>
+        </div>
+        <div class="row">
+          <div class="mb-3 col-sm-7">
+            <label for="cookie" class="h3 form-label">cookie</label>
+            <input type="text" class="form-control" id="cookie" placeholder="cookie">
+            <div id="cookieHelp" class="form-text">cookie for slack.com</div>
           </div>
         </div>
         <div class="row">
           <div class="mb-3 col-sm-3">
             <label for="channel" class="h3 form-label">#channel</label>
             <input type="text" class="form-control" id="channel" placeholder="off-topic">
-            <div id="channelHelp" class="form-text">Webhook default value or input value.</div>
-          </div>
-          <div class="mb-3 col-sm-3">
-            <label for="username" class="h3 form-label">@username</label>
-            <input type="text" class="form-control" id="username" placeholder="username">
-            <div id="usernameHelp" class="form-text">Webhook default value or input value.</div>
+            <div id="channelHelp" class="form-text">Channel, private group, or IM channel to send message to. Can be an encoded ID, or a name. </div>
           </div>
         </div>
         <div class="row">

@@ -10,56 +10,40 @@ console.log(user);
 
 let chatConf = {};
 const load = function(){
-    chrome.storage.local.get(['webhook'], function(data) {
-        chatConf.webhook = data.webhook;
+    chrome.storage.local.get(['token'], function(data) {
+        chatConf.token = data.token;
     });
     chrome.storage.local.get(['channel'], function(data) {
         chatConf.channel = data.channel;
     });
-    chrome.storage.local.get(['username'], function(data) {
-        chatConf.username = data.username;
+    chrome.storage.local.get(['cookie'], function(data) {
+        chatConf.cookie = data.cookie;
+    });
+    chrome.storage.local.get(['proxy'], function(data) {
+        chatConf.proxy = data.proxy;
     });
 };
 load();
 
-function dataJson(text){
+function postChat(text){
     console.log(text);
-    let ret = {
-        "text": user + " - " + datetime() + " " + text,
-        "username": (chatConf.username || null) ?? "kintai-bot"
-    };
-    if(chatConf.channel) {
-        ret.channel = chatConf.channel;
-    }
-    console.log(ret);
-    return ret;
+    fetch(chatConf.proxy, {
+        "method": "POST",
+        "body": JSON.stringify({
+            "token": chatConf.token,
+            "text": `${user}-${datetime()}-${text}`,
+            "channel": chatConf.channel,
+            "cookie": chatConf.cookie
+        })
+    }).then(res => res.json()).then(console.log).catch(console.error)
 }
 
-function postChat(data){
-    console.log(data);
-    fetch(chatConf.webhook, {
-        method: "POST",
-        mode: "no-cors",
-        cache: "no-cache",
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-    // })
-    // .then(res => res.json())
-    // .then(result => {
-    //     console.log(result);
-    // }).catch((e) => {
-    //     console.error(e);
-    });
-}
-
+// const timeStampButtons = document.getElementsByClassName('attendance-card-time-stamp-button');
 const timeStampButtons = document.getElementsByClassName('attendance-card-time-stamp-button');
 for(let i=0;i<timeStampButtons.length; i++){
     const element = timeStampButtons[i];
     element.addEventListener('click', function(evt){
-        let data = dataJson(element.innerText);
-        postChat(data);
+        postChat(element.innerText);
     });
 }
 

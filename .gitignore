@@ -1,2 +1,4 @@
 # Git Ignore
 tmp/
+/proxy/node_modules/
+.idea

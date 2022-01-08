@@ -1,8 +1,8 @@
 'use strict';
 
-const webhookElem = document.getElementById('webhook-url');
-chrome.storage.local.get(['webhook'], function(data) {
-  webhookElem.value = data.webhook ?? "";
+const tokenElem = document.getElementById('token');
+chrome.storage.local.get(['token'], function(data) {
+  tokenElem.value = data.token ?? "";
 });
 
 const channelElem = document.getElementById('channel');
@@ -10,22 +10,30 @@ chrome.storage.local.get(['channel'], function(data) {
   channelElem.value = data.channel ?? "";
 });
 
-const usernameElem = document.getElementById('username');
-chrome.storage.local.get(['username'], function(data) {
-  usernameElem.value = data.username ?? "";
+const cookieElem = document.getElementById('cookie');
+chrome.storage.local.get(['cookie'], function(data) {
+  cookieElem.value = data.cookie ?? "";
+});
+
+const proxyElem = document.getElementById('proxy');
+chrome.storage.local.get(['proxy'], function(data) {
+  proxyElem.value = data.proxy ?? "";
 });
 
 const buttonClick = function(){
   const button = document.getElementById('config-set');
   button.addEventListener('click', function() {
-    chrome.storage.local.set({webhook: webhookElem.value}, function() {
-      console.log('webhook is ' + webhookElem.value);
+    chrome.storage.local.set({token: tokenElem.value}, function() {
+      console.log('token is ' + tokenElem.value);
     });
     chrome.storage.local.set({channel: channelElem.value}, function() {
       console.log('channel is ' + channelElem.value);
     });
-    chrome.storage.local.set({username: usernameElem.value}, function() {
-      console.log('username is ' + usernameElem.value);
+    chrome.storage.local.set({cookie: cookieElem.value}, function() {
+      console.log('cookie is ' + cookieElem.value);
+    });
+    chrome.storage.local.set({proxy: proxyElem.value}, function() {
+      console.log('proxy is ' + proxyElem.value);
     });
   });
 };
