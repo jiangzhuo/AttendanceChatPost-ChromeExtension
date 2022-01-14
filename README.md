@@ -22,7 +22,7 @@ Chromeウェブストアに公開していないため、手動でインスト�
 
 ## 使い方
 - Chrome拡張機能のオプションでチャットツールの設定を行ってください。
-- 事前にチャットツール側で You need create a proxy for send slack message. You can use a lambda function as proxy.
+- 事前にserver側で You need create a proxy for send slack message. You can use a lambda function as proxy.
 - The lambda code is [here](https://github.com/jiangzhuo/AttendanceChatPost-ChromeExtension/tree/master/proxy), you need deploy it to AWS and create a API Gateway for it.
 - If you do not know how to setup the proxy, you can ask me on Slack.
 - You need prepare the cookie and token of you slack, you can get these information in Slack web client, open the Chrome Dev Tool -> Network -> Find some slack API request -> Copy the cookie header value and token value
