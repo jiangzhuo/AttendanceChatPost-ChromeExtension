@@ -6,14 +6,14 @@ Chrome extension for attendance chat post with `https://biz.moneyforward.com/att
 [マネーフォワードクラウド勤怠](https://biz.moneyforward.com/attendance) のホーム画面にある出勤・退勤等の打刻のアクションでチャットツールに投稿を行うGoogleChrome拡張機能です。
 
 以下の環境で確認しています。
-- [Google Chrome] バージョン: 84.0.4147.105
+- [Google Chrome] バージョン: 96
 
 
 ## Install
 Chromeウェブストアに公開していないため、手動でインストールを行ってください。
 
-1. 任意のディレクトリにソースコードをcloneまたはzipダウンロード
-2. Chrome拡張機能の **デベロッパーモード** を有効にして **パッケージ化されていない拡張機能の読み込み** で **[attendance-ext](https://github.com/sakasa/AttendanceChatPost-ChromeExtension/tree/master/attendance-ext)** フォルダを指定
+1. Git checkout this project to your local
+2. Load this extension in Chrome, through `Load unpacked`
 
 参考
 - https://developer.chrome.com/extensions/getstarted
@@ -22,11 +22,10 @@ Chromeウェブストアに公開していないため、手動でインスト�
 
 ## 使い方
 - Chrome拡張機能のオプションでチャットツールの設定を行ってください。
-- 事前にチャットツール側でIncoming Webhookの設定を行いWebhookのURLを発行しておく必要があります。
-
-  チャットツールは [Slack](https://slack.com) と [Mattermost](https://mattermost.com/) で確認を行っています。
-  - [Slack Incoming Webhook](https://slack.com/intl/ja-jp/help/articles/115005265063-Slack-%E3%81%A7%E3%81%AE-Incoming-Webhook-%E3%81%AE%E5%88%A9%E7%94%A8)
-  - [Mattermost Incoming Webhook](https://docs.mattermost.com/developer/webhooks-incoming.html)
+- 事前にチャットツール側で You need create a proxy for send slack message. You can use a lambda function as proxy.
+- The lambda code is [here](https://github.com/jiangzhuo/AttendanceChatPost-ChromeExtension/tree/master/proxy), you need deploy it to AWS and create a API Gateway for it.
+- If you do not know how to setup the proxy, you can ask me on Slack.
+- You need prepare the cookie and token of you slack, you can get these information in Slack web client, open the Chrome Dev Tool -> Network -> Find some slack API request -> Copy the cookie header value and token value
 
 - [マネーフォワードクラウド勤怠](https://biz.moneyforward.com/attendance) のホーム画面で打刻のアクション（クリック）を行うとチャットツールのチャンネルにPOSTされます。
 
