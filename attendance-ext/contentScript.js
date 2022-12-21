@@ -1,7 +1,9 @@
 const datetime = function(){
-    const dateStr = document.getElementsByClassName('attendance-card-time-recorder-date')[0].innerText;
-    const timeStr = document.getElementsByClassName('attendance-card-time-recorder-time')[0].innerText;
-    return '[' +  dateStr + ' ' + timeStr + ']';
+    // const dateStr = document.getElementsByName('web_time_recorder_form[date]')[0].value;
+    // const timeStr = document.getElementsByName('web_time_recorder_form[user_time]')[0].value;
+    const timeStr = (new Date()).toLocaleString();
+    //return '[' +  dateStr + ' ' + timeStr + ']';
+    return '[' + timeStr + ']';
 };
 console.log(datetime());
 
@@ -38,13 +40,14 @@ function postChat(text){
     }).then(res => res.json()).then(console.log).catch(console.error)
 }
 
-// const timeStampButtons = document.getElementsByClassName('attendance-card-time-stamp-button');
-const timeStampButtons = document.getElementsByClassName('attendance-card-time-stamp-button');
+// const timeStampButtons = document.getElementsByClassName('attendance-card-title');
+const timeStampButtons = [document.querySelectorAll('div.clock_in > button')[0],document.querySelectorAll('div.clock_out > button')[0]]
 for(let i=0;i<timeStampButtons.length; i++){
     const element = timeStampButtons[i];
     element.addEventListener('click', function(evt){
         postChat(element.innerText);
     });
+    console.log('buttons added listener');
 }
 
 chrome.storage.onChanged.addListener(function(changes, namespace) {
