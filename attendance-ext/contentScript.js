@@ -1,9 +1,8 @@
 const datetime = function(){
-    // const dateStr = document.getElementsByName('web_time_recorder_form[date]')[0].value;
-    // const timeStr = document.getElementsByName('web_time_recorder_form[user_time]')[0].value;
-    const timeStr = (new Date()).toLocaleString();
-    //return '[' +  dateStr + ' ' + timeStr + ']';
-    return '[' + timeStr + ']';
+    const statusContainer = document.getElementsByClassName('status-container')[0];
+    const dateStr = statusContainer.firstChild.firstChild.firstChild.innerText;
+    const timeStr = statusContainer.lastChild.firstChild.firstChild.innerText;
+    return '[' +  dateStr + ' ' + timeStr + ']';
 };
 console.log(datetime());
 
@@ -40,11 +39,10 @@ function postChat(text){
     }).then(res => res.json()).then(console.log).catch(console.error)
 }
 
-// const timeStampButtons = document.getElementsByClassName('attendance-card-title');
-const timeStampButtons = [document.querySelectorAll('div.clock_in > button')[0],document.querySelectorAll('div.clock_out > button')[0]]
-for(let i=0;i<timeStampButtons.length; i++){
+const timeStampButtons = document.getElementsByClassName('time-stamp-button');
+for (let i = 0; i < timeStampButtons.length; i++) {
     const element = timeStampButtons[i];
-    element.addEventListener('click', function(evt){
+    element.addEventListener('click', function (evt) {
         postChat(element.innerText);
     });
     console.log('buttons added listener');
